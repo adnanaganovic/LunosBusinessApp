@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+<!--   persistance-unit name je bitan za EntityManager i povezivanje sa bazom-->
+    <persistence-unit name="lunosPU" transaction-type="RESOURCE_LOCAL">
+<!--            <persistence-unit name="lunosPU" transaction-type="JTA">-->
+
+        <!--   provider (Hibernate) se mora navesti, ručno dodati kako bi aplikacija radila-->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!--   Entity klase (pored anotacija za tabele u bazi) mapiramo još i ovdje-->
+        <class>com.lunosapp.lunosbusinessapp.entity.Address</class>
+        <class>com.lunosapp.lunosbusinessapp.entity.Client</class>
+        <class>com.lunosapp.lunosbusinessapp.entity.Municipality</class>
+        <class>com.lunosapp.lunosbusinessapp.entity.Privilege</class>
+        <class>com.lunosapp.lunosbusinessapp.entity.Project</class>
+        <class>com.lunosapp.lunosbusinessapp.entity.ProjectOrder</class>
+<!--        <class>com.lunosapp.lunosbusinessapp.entity.ProjectOrderClient</class>-->
+        <class>com.lunosapp.lunosbusinessapp.entity.Region</class>
+        <class>com.lunosapp.lunosbusinessapp.entity.Status</class>
+        <class>com.lunosapp.lunosbusinessapp.entity.User</class>
+
+        <!--   Ovdje se navodi baza i njen path, driver etc.-->
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/lunos_ba?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.password" value="root"/>
+        </properties>
+    </persistence-unit>
+</persistence>
