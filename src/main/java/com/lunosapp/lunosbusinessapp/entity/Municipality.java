@@ -115,11 +115,13 @@ public class Municipality implements Serializable {
 
     @Override
     public String toString() {
-        return "Municipality{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", addressList=" + addressList +
-                ", idRegion=" + idRegion +
-                '}';
+        return name+", ID["+id+"]";
+//        return id+" "+name+" "+ idRegion+" ";
+//        return "Municipality{" +
+//                "id=" + id +
+//                ", name='" + name + '\'' +
+//                ", addressList=" + addressList +
+//                ", idRegion=" + idRegion +
+//                '}';
     }
 }

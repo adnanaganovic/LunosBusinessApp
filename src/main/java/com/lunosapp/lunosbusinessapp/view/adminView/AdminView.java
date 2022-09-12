@@ -1,8 +1,8 @@
-package com.lunosapp.lunosbusinessapp.views.UserViews;
+package com.lunosapp.lunosbusinessapp.view.adminView;
 
-import com.lunosapp.lunosbusinessapp.views.AdminViews.ProjectAdminPanel;
-import com.lunosapp.lunosbusinessapp.views.AdminViews.ProjectOrderPanel;
 import com.lunosapp.lunosbusinessapp.Controller;
+import com.lunosapp.lunosbusinessapp.view.userView.ProjectAdminPanel;
+import com.lunosapp.lunosbusinessapp.view.userView.ProjectOrderPanel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -11,18 +11,22 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-public class UserView extends BorderPane {
-
+public class AdminView extends BorderPane {
+    private final ToggleButton userToggleButton = new ToggleButton("Korisnici");
+    private final ToggleButton privilegijetToggleButton = new ToggleButton("Privilegije");
     private final ToggleButton projectToggleButton = new ToggleButton("Projekti");
 
     private final ToggleButton orderToggleButton = new ToggleButton("Narudžbe");
     private final Button logoutButton = new Button("Odjava");
     //
-    private ProjectOrderPanel projectOrderPanel = new ProjectOrderPanel();
+    private UserAdminPanel userAdminPanel = new UserAdminPanel();
+    private PrivilegePanel privilegePanel = new PrivilegePanel();
     private ProjectAdminPanel projectAdminPanel = new ProjectAdminPanel();
+    private ProjectOrderPanel projectOrderPanel = new ProjectOrderPanel();
 
-    public UserView() {
-        setCenter(projectOrderPanel);
+    //
+    public AdminView() {
+        setCenter(userAdminPanel);
         BackgroundFill background_fill = new BackgroundFill(Color.ROYALBLUE,
                 CornerRadii.EMPTY, Insets.EMPTY);
         Background background = new Background(background_fill);
@@ -30,10 +34,12 @@ public class UserView extends BorderPane {
 
         //OVAKO ĆEMO ISKLJUČITI SELEKTOVANI BUTTON (KADA SELEKTUJEMO userToggleButton ISKLJUČIT ĆEMO projectToggleButton i obratno)
         ToggleGroup menuToggleGroup = new ToggleGroup();
+        userToggleButton.setToggleGroup(menuToggleGroup);
+        privilegijetToggleButton.setToggleGroup(menuToggleGroup);
         projectToggleButton.setToggleGroup(menuToggleGroup);
         orderToggleButton.setToggleGroup(menuToggleGroup);
 //
-        projectToggleButton.setSelected(true);
+        userToggleButton.setSelected(true);
 //
         HBox mainMenu = new HBox();
         mainMenu.setSpacing(5);
@@ -41,7 +47,8 @@ public class UserView extends BorderPane {
         logoutButton.setOnAction(Controller.instance().getEventBus().getLogoutEvent());
         logoutButton.setText("Odjava(" + Controller.instance().getLoggedUser().getName() + ")");
 
-           //Ima i drugi način preko Override metode (ISPOD
+        userToggleButton.setOnAction(e -> setCenter(userAdminPanel));   //Ima i drugi način preko Override metode (ISPOD
+        privilegijetToggleButton.setOnAction(e -> setCenter(privilegePanel));
         projectToggleButton.setOnAction(e -> setCenter(projectAdminPanel));
         orderToggleButton.setOnAction(e -> setCenter(projectOrderPanel));
 
@@ -57,7 +64,7 @@ public class UserView extends BorderPane {
 //            setCenter(projectAdminPanel);
 //        }
 
-        mainMenu.getChildren().addAll(projectToggleButton, orderToggleButton);
+        mainMenu.getChildren().addAll(userToggleButton,privilegijetToggleButton, projectToggleButton, orderToggleButton);
 
 //
         HBox logoutHBox = new HBox(logoutButton);
@@ -70,4 +77,5 @@ public class UserView extends BorderPane {
         setTop(topPane);
     }
 
-}
+    }
+

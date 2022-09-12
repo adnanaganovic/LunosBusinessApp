@@ -1,12 +1,12 @@
-package com.lunosapp.lunosbusinessapp.events;
+package com.lunosapp.lunosbusinessapp.event;
 
 import com.lunosapp.lunosbusinessapp.entity.Privilege;
 import com.lunosapp.lunosbusinessapp.entity.User;
 import com.lunosapp.lunosbusinessapp.service.userService.UserServiceFactory;
-import com.lunosapp.lunosbusinessapp.views.AdminViews.AdminView;
+import com.lunosapp.lunosbusinessapp.view.adminView.AdminView;
 import com.lunosapp.lunosbusinessapp.Controller;
-import com.lunosapp.lunosbusinessapp.views.LoginView;
-import com.lunosapp.lunosbusinessapp.views.UserViews.UserView;
+import com.lunosapp.lunosbusinessapp.view.LoginView;
+import com.lunosapp.lunosbusinessapp.view.userView.UserView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -21,10 +21,15 @@ public class LoginEvent implements EventHandler<ActionEvent> {
         //prvo uzmemo podatke: username i password
         String username = loginView.getUsername();
         String password = Controller.instance().getLoginView().getPassword();
+
         if(username == null || username.isEmpty() || password == null || password.isEmpty()){
             loginView.setLoginMessage("Username ili password nije unesen!");
             return;
         }
+//        password = UserServiceFactory.USER_SERVICE_FACTORY.getUserServiceLocal().hash(password);
+
+
+
         User user = UserServiceFactory.USER_SERVICE_FACTORY.getUserServiceLocal().login(username, password);
         if(user == null){
             loginView.setLoginMessage("Netačan username ili password!");
@@ -51,7 +56,6 @@ public class LoginEvent implements EventHandler<ActionEvent> {
             Scene scene = new Scene(mainPanel, 1100, 500);
             Controller.instance().getStage().setScene(scene);   //OVDJE NECE DA PRIMI getScene(scene) == SOLVE zato što treba: setScene(scene);
         }
-
 
     }
 }

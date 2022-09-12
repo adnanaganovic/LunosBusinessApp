@@ -110,9 +110,6 @@ public class Project implements Serializable{
 
     @Override
     public String toString() {
-        return "Project{" +
-                "id=" + id +
-                ",SystemType='" + systemType +
-                '}';
+        return systemType + ", ID["+id+"], "+price+"KM";
     }
 }

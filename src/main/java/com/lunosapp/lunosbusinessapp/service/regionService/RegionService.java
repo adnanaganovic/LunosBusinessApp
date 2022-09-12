@@ -1,21 +1,19 @@
-package com.lunosapp.lunosbusinessapp.service.projectOrderService;
+package com.lunosapp.lunosbusinessapp.service.regionService;
 
-import com.lunosapp.lunosbusinessapp.entity.ProjectOrder;
+import com.lunosapp.lunosbusinessapp.entity.Region;
 import com.lunosapp.lunosbusinessapp.service.AbstractService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
-public class ProjectOrderService extends AbstractService<ProjectOrder> implements ProjectOrderServiceLocal{
+public class RegionService extends AbstractService<Region> implements RegionServiceLocal {
 
-    public ProjectOrderService() {
-        super(ProjectOrder.class);
+    public RegionService() {
+        super(Region.class);
     }
 
     @Override
     protected EntityManager getEntityManager() {
         return Persistence.createEntityManagerFactory("lunosPU").createEntityManager();
-
-
     }
 }

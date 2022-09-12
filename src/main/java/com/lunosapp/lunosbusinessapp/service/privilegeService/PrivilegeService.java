@@ -18,7 +18,8 @@ class PrivilegeService extends AbstractService<Privilege> implements PrivilegeSe
     }
 
 //    @Override
-//    public List<Privilege> findAll() {
-//        return null;
+//    public void create(Privilege privilege) {
+//
 //    }
+
 }

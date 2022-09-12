@@ -1,6 +1,8 @@
 package com.lunosapp.lunosbusinessapp.entity;
 
 
+import com.lunosapp.lunosbusinessapp.service.userService.UserServiceFactory;
+
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

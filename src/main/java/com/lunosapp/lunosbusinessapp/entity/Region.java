@@ -21,9 +21,9 @@ import javax.persistence.Table;
 @Table(name = "region")
 //@XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "Region.findAll", query = "SELECT c FROM Region c"),
-        @NamedQuery(name = "Region.findById", query = "SELECT c FROM Region c WHERE c.id = :id"),
-        @NamedQuery(name = "Region.findByName", query = "SELECT c FROM Region c WHERE c.name = :name")})
+        @NamedQuery(name = "Region.findAll", query = "SELECT r FROM Region r"),
+        @NamedQuery(name = "Region.findById", query = "SELECT r FROM Region r WHERE r.id = :id"),
+        @NamedQuery(name = "Region.findByName", query = "SELECT r FROM Region r WHERE r.name = :name")})
 public class Region implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -97,10 +97,6 @@ public class Region implements Serializable {
 
     @Override
     public String toString() {
-        return "Region{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", municipalityList=" + municipalityList +
-                '}';
+        return name+", ID["+id+ "]";
     }
 }

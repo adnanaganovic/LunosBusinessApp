@@ -1,10 +1,8 @@
-package com.lunosapp.lunosbusinessapp.views.AdminViews;
+package com.lunosapp.lunosbusinessapp.view.userView;
 
 import com.lunosapp.lunosbusinessapp.entity.Project;
 import com.lunosapp.lunosbusinessapp.service.projectService.ProjectService;
 import com.lunosapp.lunosbusinessapp.service.projectService.ProjectServiceFactory;
-import com.lunosapp.lunosbusinessapp.service.userService.UserServiceFactory;
-import com.lunosapp.lunosbusinessapp.service.userService.UserServiceLocal;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -66,7 +64,8 @@ public class ProjectAdminPanel extends VBox {
             }
         });
 
-
+        TableColumn<Project, Integer> idProjekta = new TableColumn<>("Id projekta");
+        idProjekta.setCellValueFactory(new PropertyValueFactory<Project, Integer>("id"));
 
         TableColumn<Project, String> projectSystemType = new TableColumn<>("Tip sistema");
         projectSystemType.setCellValueFactory(new PropertyValueFactory<Project, String>("systemType")); //MORA BITI: ("username") isti naziv kao u entitetu npr. "private String username" (@Column(name = "username") private String username);
@@ -74,14 +73,14 @@ public class ProjectAdminPanel extends VBox {
         TableColumn<Project, Integer> numberOfElements = new TableColumn<>("Broj elemenata sistema");
         numberOfElements.setCellValueFactory(new PropertyValueFactory<Project, Integer>("numberOfElements"));
 //
-        TableColumn<Project, BigDecimal> price = new TableColumn<>("Cijena sistema");
+        TableColumn<Project, BigDecimal> price = new TableColumn<>("Cijena sistema u KM");
         price.setCellValueFactory(new PropertyValueFactory<Project, BigDecimal>("price"));
 
 
         ProjectService projectService = ProjectServiceFactory.PROJECT_SERVICE_FACTORY.getProjectService();
         projectObservableList = FXCollections.observableList(projectService.findAll());
         projectTableView.setItems(projectObservableList);
-        projectTableView.getColumns().addAll(projectSystemType, numberOfElements, price);
+        projectTableView.getColumns().addAll(idProjekta, projectSystemType, numberOfElements, price);
 
         getChildren().addAll(titleLabel, projectTableView, getForm());
     }

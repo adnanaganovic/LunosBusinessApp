@@ -1,10 +1,10 @@
 package com.lunosapp.lunosbusinessapp;
 
 import com.lunosapp.lunosbusinessapp.entity.User;
-import com.lunosapp.lunosbusinessapp.views.AdminViews.AdminView;
-import com.lunosapp.lunosbusinessapp.views.LoginView;
-import com.lunosapp.lunosbusinessapp.views.UserViews.UserView;
-import com.lunosapp.lunosbusinessapp.events.EventBus;
+import com.lunosapp.lunosbusinessapp.view.adminView.AdminView;
+import com.lunosapp.lunosbusinessapp.view.LoginView;
+import com.lunosapp.lunosbusinessapp.view.userView.UserView;
+import com.lunosapp.lunosbusinessapp.event.EventBus;
 import javafx.stage.Stage;
 
 public class Controller {

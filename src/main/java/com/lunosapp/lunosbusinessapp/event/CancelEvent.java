@@ -1,4 +1,4 @@
-package com.lunosapp.lunosbusinessapp.events;
+package com.lunosapp.lunosbusinessapp.event;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

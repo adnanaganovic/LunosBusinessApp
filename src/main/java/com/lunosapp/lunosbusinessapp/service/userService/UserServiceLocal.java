@@ -24,4 +24,8 @@ public interface UserServiceLocal {
     void remove(User user);
 
     User find(Integer id);
+
+    String hash (String password);
+
+
 }

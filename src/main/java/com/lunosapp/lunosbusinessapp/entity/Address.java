@@ -121,14 +121,18 @@ public class Address implements Serializable {
 
     @Override
     public String toString() {
-        return "Address{" +
-                "id=" + id +
-                ", street='" + street + '\'' +
-                ", number='" + number + '\'' +
-                ", floor='" + floor + '\'' +
-                ", idMunicipality=" + idMunicipality +
-                ", clientList=" + clientList +
-                '}';
+        return street+" "+number+", "+"ID["+id+"], "+ idMunicipality.getName();
     }
+//    @Override
+//    public String toString() {                       //Original
+//        return "Address{" +
+//                "id=" + id +
+//                ", street='" + street + '\'' +
+//                ", number='" + number + '\'' +
+//                ", floor='" + floor + '\'' +
+//                ", idMunicipality=" + idMunicipality +
+//                ", clientList=" + clientList +
+//                '}';
+//    }
 }
 

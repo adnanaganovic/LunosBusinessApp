@@ -1,4 +1,4 @@
-package com.lunosapp.lunosbusinessapp.views.AdminViews;
+package com.lunosapp.lunosbusinessapp.view.adminView;
 
 import com.lunosapp.lunosbusinessapp.entity.Privilege;
 import com.lunosapp.lunosbusinessapp.entity.User;
@@ -30,7 +30,8 @@ public class UserAdminPanel extends VBox {
     private final PasswordField passwordField = new PasswordField();
     private final TextField nameTextField = new TextField();
     private final TextField surnameTextField = new TextField();
-    private final ChoiceBox<Privilege> privilegeChoiceBox = new ChoiceBox<>();    //POLJA OD getForm(){}
+    private final ChoiceBox<Privilege> privilegeChoiceBox = new ChoiceBox<>();
+    //POLJA OD getForm(){}
 
     private Button addUserButton = new Button("Dodaj");
     private Button deleteUserButton = new Button("Obriši");
@@ -121,7 +122,11 @@ public class UserAdminPanel extends VBox {
 //            //TRANZIJENTAN
             User user = new User();
             user.setUsername(usernameTextField.getText());
+               // ovdje se uzima password
             user.setPassword(passwordField.getText());
+
+
+
             user.setName(nameTextField.getText());
             user.setSurname(surnameTextField.getText());
             user.setIdPrivilege(privilegeChoiceBox.getValue());
@@ -156,4 +161,12 @@ public class UserAdminPanel extends VBox {
                 surnameTextField.clear();
 //
             }
+
+//    public String encryptString (String input) throws NoSuchAlgorithmException {
+//        input = passwordField.getText();
+//        MessageDigest md = MessageDigest.getInstance("MD5");
+//        byte[] messageDigest = md.digest(input.getBytes());
+//        BigInteger bigInteger = new BigInteger(1,messageDigest);
+//        return  bigInteger.toString(16);
+//    }
         }

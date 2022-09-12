@@ -1,4 +1,4 @@
-package com.lunosapp.lunosbusinessapp.views.AdminViews;
+package com.lunosapp.lunosbusinessapp.view.userView;
 
 import com.lunosapp.lunosbusinessapp.Controller;
 import javafx.geometry.Insets;
@@ -9,20 +9,29 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-public class AdminView extends BorderPane {
-    private final ToggleButton userToggleButton = new ToggleButton("Korisnici");
+public class UserView extends BorderPane {
+
+    private final ToggleButton clientToggleButton = new ToggleButton("Klijenti");
+    private final ToggleButton regionToggleButton = new ToggleButton("Regije");
+    private final ToggleButton municipalityToggleButton = new ToggleButton("Opštine");
+    private final ToggleButton addressToggleButton = new ToggleButton("Adrese");
     private final ToggleButton projectToggleButton = new ToggleButton("Projekti");
 
     private final ToggleButton orderToggleButton = new ToggleButton("Narudžbe");
+
     private final Button logoutButton = new Button("Odjava");
     //
-    private UserAdminPanel userAdminPanel = new UserAdminPanel();
+
+    private ClientPanel clientPanel = new ClientPanel();
+    private RegionPanel regionPanel = new RegionPanel();
+    private MunicipalityPanel municipalityPanel = new MunicipalityPanel();
+    private AddressPanel addressPanel = new AddressPanel();
     private ProjectAdminPanel projectAdminPanel = new ProjectAdminPanel();
     private ProjectOrderPanel projectOrderPanel = new ProjectOrderPanel();
 
-    //
-    public AdminView() {
-        setCenter(userAdminPanel);
+
+    public UserView() {
+        setCenter(projectOrderPanel);
         BackgroundFill background_fill = new BackgroundFill(Color.ROYALBLUE,
                 CornerRadii.EMPTY, Insets.EMPTY);
         Background background = new Background(background_fill);
@@ -30,11 +39,14 @@ public class AdminView extends BorderPane {
 
         //OVAKO ĆEMO ISKLJUČITI SELEKTOVANI BUTTON (KADA SELEKTUJEMO userToggleButton ISKLJUČIT ĆEMO projectToggleButton i obratno)
         ToggleGroup menuToggleGroup = new ToggleGroup();
-        userToggleButton.setToggleGroup(menuToggleGroup);
+        clientToggleButton.setToggleGroup(menuToggleGroup);
+        regionToggleButton.setToggleGroup(menuToggleGroup);
+        municipalityToggleButton.setToggleGroup(menuToggleGroup);
+        addressToggleButton.setToggleGroup(menuToggleGroup);
         projectToggleButton.setToggleGroup(menuToggleGroup);
         orderToggleButton.setToggleGroup(menuToggleGroup);
 //
-        userToggleButton.setSelected(true);
+        clientToggleButton.setSelected(true);
 //
         HBox mainMenu = new HBox();
         mainMenu.setSpacing(5);
@@ -42,9 +54,14 @@ public class AdminView extends BorderPane {
         logoutButton.setOnAction(Controller.instance().getEventBus().getLogoutEvent());
         logoutButton.setText("Odjava(" + Controller.instance().getLoggedUser().getName() + ")");
 
-        userToggleButton.setOnAction(e -> setCenter(userAdminPanel));   //Ima i drugi način preko Override metode (ISPOD
+           //Ima i drugi način preko Override metode (ISPOD
+        clientToggleButton.setOnAction(e -> setCenter(clientPanel));
+        regionToggleButton.setOnAction(e -> setCenter(regionPanel));
+        municipalityToggleButton.setOnAction(e -> setCenter(municipalityPanel));
+        addressToggleButton.setOnAction(e -> setCenter(addressPanel));
         projectToggleButton.setOnAction(e -> setCenter(projectAdminPanel));
         orderToggleButton.setOnAction(e -> setCenter(projectOrderPanel));
+
 
 //        userToggleButton.setOnAction(new EventHandler<ActionEvent>() {
 //            @Override
@@ -58,7 +75,7 @@ public class AdminView extends BorderPane {
 //            setCenter(projectAdminPanel);
 //        }
 
-        mainMenu.getChildren().addAll(userToggleButton, projectToggleButton, orderToggleButton);
+        mainMenu.getChildren().addAll(clientToggleButton, regionToggleButton, municipalityToggleButton, addressToggleButton, projectToggleButton, orderToggleButton);
 
 //
         HBox logoutHBox = new HBox(logoutButton);
@@ -71,5 +88,4 @@ public class AdminView extends BorderPane {
         setTop(topPane);
     }
 
-    }
-
+}

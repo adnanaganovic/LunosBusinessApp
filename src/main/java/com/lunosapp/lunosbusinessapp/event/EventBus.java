@@ -1,4 +1,4 @@
-package com.lunosapp.lunosbusinessapp.events;
+package com.lunosapp.lunosbusinessapp.event;
 
 
 //SABIRNICA SVIH EVENATA

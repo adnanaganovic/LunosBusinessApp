@@ -1,6 +1,6 @@
 package com.lunosapp.lunosbusinessapp;
 
-import com.lunosapp.lunosbusinessapp.views.LoginView;
+import com.lunosapp.lunosbusinessapp.view.LoginView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -14,7 +14,7 @@ public class HelloApplication extends Application {
         LoginView loginView = new LoginView();
         Controller.instance().setStage(stage);
         Controller.instance().setLoginView(loginView);
-        Scene scene = new Scene(loginView, 750, 180);
+        Scene scene = new Scene(loginView, 600, 250);
         stage.setTitle("LUNOS poslovna aplikacija");
 
         stage.getIcons().add(new Image("logoIcon.jpg"));    //setovanje ikonice

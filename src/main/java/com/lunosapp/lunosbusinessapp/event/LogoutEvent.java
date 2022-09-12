@@ -1,7 +1,7 @@
-package com.lunosapp.lunosbusinessapp.events;
+package com.lunosapp.lunosbusinessapp.event;
 
 import com.lunosapp.lunosbusinessapp.Controller;
-import com.lunosapp.lunosbusinessapp.views.LoginView;
+import com.lunosapp.lunosbusinessapp.view.LoginView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;

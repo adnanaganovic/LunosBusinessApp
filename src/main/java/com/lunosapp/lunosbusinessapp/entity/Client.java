@@ -17,24 +17,26 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlTransient;
 //import javax.xml.bind.annotation.XmlTransient;
 //import javax.xml.bind.annotation.XmlRootElement;
 //import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Grupa1
+ * Client nikako ne ide, ima ne logičnih errora
  */
 @Entity
 @Table(name = "client")
 //@XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "Client.findAll", query = "SELECT g FROM Client g"),
-        @NamedQuery(name = "Client.findById", query = "SELECT g FROM Client g WHERE g.id = :id"),
-        @NamedQuery(name = "Client.findByName", query = "SELECT g FROM Client g WHERE g.name = :name"),
-        @NamedQuery(name = "Client.findBySurname", query = "SELECT g FROM Client g WHERE g.surname = :surname"),
-        @NamedQuery(name = "Client.findByPhone", query = "SELECT g FROM Client g WHERE g.phone = :phone"),})
-public class Client implements Serializable {
+        @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c"),
+        @NamedQuery(name = "Client.findById", query = "SELECT c FROM Client c WHERE c.id = :id"),
+        @NamedQuery(name = "Client.findByName", query = "SELECT c FROM Client c WHERE c.name = :name"),
+        @NamedQuery(name = "Client.findBySurname", query = "SELECT c FROM Client c WHERE c.surname = :surname"),
+        @NamedQuery(name = "Client.findByPhone", query = "SELECT c FROM Client c WHERE c.phone = :phone"),
+        @NamedQuery(name = "Client.findByEmail", query = "SELECT c FROM Client c WHERE c.email = :email"),})
+public class Client implements Serializable {   //NE RADI - NE RAZUMIJEM
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,7 +44,6 @@ public class Client implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
@@ -53,6 +54,9 @@ public class Client implements Serializable {
     @Basic(optional = false)
     @Column(name = "phone")
     private String phone;
+    @Basic(optional = false)   //E-MAIL KOLONA NE MOŽE da se setuje
+    @Column(name = "email")
+    private String email;
     @ManyToMany(mappedBy = "clientList")
     private List<ProjectOrder> projectOrderList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
@@ -60,20 +64,22 @@ public class Client implements Serializable {
     @JoinColumn(name = "id_address", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Address idAddress;
-
     public Client() {
     }
 
-    public Client(Integer id) {
+    public Client (Integer id) {
         this.id = id;
     }
 
-    public Client(Integer id,  String name, String surname, String phone) {
+    public Client(Integer id,  String name, String surname, String phone, String email) {   //E-MAIL KOLONA NE MOŽE
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.phone = phone;
+        this.email = email; //E-MAIL KOLONA NE MOŽE
     }
+
+
 
     public Integer getId() {
         return id;
@@ -107,28 +113,34 @@ public class Client implements Serializable {
         this.phone = phone;
     }
 
-//    @XmlTransient
+    public String getEmail() {              //E-MAIL KOLONA NE MOŽE
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+//        @XmlTransient
     public List<ProjectOrder> getProjectOrderList() {
         return projectOrderList;
     }
-
+//
     public void setProjectOrderList(List<ProjectOrder> projectOrderList) {
         this.projectOrderList = projectOrderList;
     }
-
-//    @XmlTransient
-    public List<ProjectOrder> getProjectOrderList1() {
-        return projectOrderList1;
-    }
-
-    public void setProjectOrderList1(List<ProjectOrder> projectOrderList1) {
-        this.projectOrderList1 = projectOrderList1;
-    }
-
+//
+////    @XmlTransient
+//    public List<ProjectOrder> getProjectOrderList1() {
+//        return projectOrderList1;
+//    }
+//    public void setProjectOrderList1(List<ProjectOrder> projectOrderList1) {
+//        this.projectOrderList1 = projectOrderList1;
+//    }
+//
     public Address getIdAddress() {
         return idAddress;
     }
-
+//
     public void setIdAddress(Address idAddress) {
         this.idAddress = idAddress;
     }
@@ -155,14 +167,7 @@ public class Client implements Serializable {
 
     @Override
     public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", phone='" + phone+ '\'' +
-                ", projectOrderList=" + projectOrderList +
-                ", projectOrderList1=" + projectOrderList1 +
-                ", idAddress=" + idAddress +
-                '}';
+        return name + " " + surname +
+                ", ID[" + id+ "], " + idAddress.getIdMunicipality().getName();
     }
 }
