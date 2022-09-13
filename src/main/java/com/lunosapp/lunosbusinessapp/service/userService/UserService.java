@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -35,10 +36,17 @@ class UserService extends AbstractService<User> implements UserServiceLocal {
         query.setParameter("username", username);
         try {
             User user = (User) query.getSingleResult();
-//            hash.verify      (kada napravimo hash funkciju, ovdje ubacujemo tu funkciju verify)
+//       ///////////////     hash.verify      (kada napravimo hash funkciju, ovdje ubacujemo tu funkciju verify)////////////////////////
+//            doHashing(password);
+//            String hashedPassword = password;
+//            doHashing(hashedPassword);
+//            hashedPassword.getBytes();
+//            password = passwordField.getText();
+//            password = user.getPassword();
 
-
-            if (user != null && password.equals(user.getPassword())) {
+//            if (user != null && password.equals(user.getPassword())) {
+//                return user;
+            if (user != null && doHashing(password).equals(user.getPassword())) {
                 return user;
 
             }
@@ -70,13 +78,40 @@ class UserService extends AbstractService<User> implements UserServiceLocal {
 
 
 
-
-
-
-
     //    EntityManager dobijamo preko klse "Persistance"
     @Override
     protected EntityManager getEntityManager() {
         return Persistence.createEntityManagerFactory("lunosPU").createEntityManager();
     }
+
+    public String doHashing (String input) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger bigInt = new BigInteger(1,messageDigest);
+            return bigInt.toString(16);
+        }catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+        }return "";
+    }
+
+
+//    public String doHashing (String hashedPassword) {
+//        try {
+//            MessageDigest messageDigest = java.security.MessageDigest.getInstance("MD5");
+//            messageDigest.update(hashedPassword.getBytes(StandardCharsets.UTF_8));
+//            messageDigest.digest();
+//            byte[] resultByteArray = messageDigest.digest();
+//
+//            StringBuilder stringBuilder = new StringBuilder();
+//
+//            for (byte b : resultByteArray){
+//                stringBuilder.append(String.format("%02x", b));
+//            }
+//            return stringBuilder.toString();
+//        }catch (NoSuchAlgorithmException e){
+//            e.printStackTrace();
+//        }
+//        return hashedPassword;
+//    }
 }

@@ -25,7 +25,7 @@ public interface UserServiceLocal {
 
     User find(Integer id);
 
-    String hash (String password);
+//    String hash (String password);
 
 
 }

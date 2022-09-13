@@ -13,6 +13,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class LoginEvent implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent actionEvent) {
@@ -21,6 +25,9 @@ public class LoginEvent implements EventHandler<ActionEvent> {
         //prvo uzmemo podatke: username i password
         String username = loginView.getUsername();
         String password = Controller.instance().getLoginView().getPassword();
+
+//        String hashedPassword = doHashing(password);
+
 
         if(username == null || username.isEmpty() || password == null || password.isEmpty()){
             loginView.setLoginMessage("Username ili password nije unesen!");
@@ -58,4 +65,23 @@ public class LoginEvent implements EventHandler<ActionEvent> {
         }
 
     }
+    public String doHashing (String password) {
+        try {
+            MessageDigest messageDigest = java.security.MessageDigest.getInstance("MD5");
+            messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
+            messageDigest.digest();
+            byte[] resultByteArray = messageDigest.digest();
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            for (byte b : resultByteArray){
+                stringBuilder.append(String.format("%02x", b));
+            }
+            return stringBuilder.toString();
+        }catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+        }
+        return "";
+    }
+
 }

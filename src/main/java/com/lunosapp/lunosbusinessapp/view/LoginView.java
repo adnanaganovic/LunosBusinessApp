@@ -4,13 +4,19 @@ import com.lunosapp.lunosbusinessapp.Controller;
 import com.lunosapp.lunosbusinessapp.service.Encryptor;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 public class LoginView extends GridPane {
@@ -25,14 +31,11 @@ public class LoginView extends GridPane {
     private final Label messageLabel = new Label();//ovdje ne piše ništa..sadržaj ćemo možda dinamički popuniti
 
 
-    HashMap<String, String> loginInfo = new HashMap<>(); //HASH??
-    Encryptor encryptor = new Encryptor(); //HASH
-
     public LoginView() {
         setHgap(10);
-        setVgap(10);
+        setVgap(15);
         setPadding(new Insets(25, 25, 25, 25));
-        setAlignment(Pos.CENTER);
+        setAlignment(Pos.TOP_CENTER);
 
 //        PROMJENA BOJE U JAVAFX APP
         BackgroundFill background_fill = new BackgroundFill(Color.ROYALBLUE,
@@ -42,6 +45,27 @@ public class LoginView extends GridPane {
         usernameLabel.setTextFill(Color.WHITESMOKE);
         passwordLabel.setTextFill(Color.WHITE);
         messageLabel.setTextFill(Color.WHITE);
+
+        //DODAVANJE LOGA
+        Image image = new Image("white logo.png");
+        ImageView imageView = new ImageView();
+        imageView.setImage(image);
+        imageView.setFitWidth(300);
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setCache(true);
+        setAlignment(Pos.BOTTOM_CENTER);
+
+        VBox hBox = new VBox();
+        hBox.getChildren().add(imageView);
+        add(hBox, 1,4);
+
+//        imageView.setX(50);
+//        imageView.setY(25);
+//        imageView.setFitHeight(100);
+//        imageView.setFitWidth(100);
+
+
 
         //username
         add(usernameLabel, 0, 0);
@@ -69,6 +93,9 @@ public class LoginView extends GridPane {
 //    }
     public String getPassword() {
         return passwordField.getText();
+//        String password = passwordField.getText();
+//        String hashedPassword = doHashing(password);
+//        return hashedPassword;
     }
 
 
@@ -76,4 +103,24 @@ public class LoginView extends GridPane {
     public void setLoginMessage(String message){
         messageLabel.setText(message);
     }
+
+//    public String doHashing (String password) {
+//        try {
+//            MessageDigest messageDigest = java.security.MessageDigest.getInstance("MD5");
+//            messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
+//            messageDigest.digest();
+//            byte[] resultByteArray = messageDigest.digest();
+//
+//            StringBuilder stringBuilder = new StringBuilder();
+//
+//            for (byte b : resultByteArray){
+//                stringBuilder.append(String.format("%02x", b));
+//            }
+//            return stringBuilder.toString();
+//        }catch (NoSuchAlgorithmException e){
+//            e.printStackTrace();
+//        }
+//        return "";
+//    }
 }
+

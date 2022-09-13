@@ -15,6 +15,10 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public class UserAdminPanel extends VBox {
@@ -24,6 +28,8 @@ public class UserAdminPanel extends VBox {
 
     private ObservableList<User> userObservableList;   //1.ovo je na kraju dodato i objasnjeno JWS 2/5
     private TableView<User> userTableView = new TableView<>();
+
+    private String password;
 //
 //    OVO SU POLJA OD getForm(){}
     private final TextField usernameTextField = new TextField();
@@ -121,9 +127,16 @@ public class UserAdminPanel extends VBox {
         if (validate()) {                                  // objasnjeno u SE 1/3
 //            //TRANZIJENTAN
             User user = new User();
-            user.setUsername(usernameTextField.getText());
+//            user.setUsername(usernameTextField.getText());
+            String username = usernameTextField.getText();
+            user.setUsername(username);
                // ovdje se uzima password
-            user.setPassword(passwordField.getText());
+//            user.setPassword(passwordField.getText());   //SAMO OVA LINIJA JE ZA UZIMANJE PASSWORDA
+//            passwordField.getText();
+//            user.setPassword(passwordField.getText());
+            String password = passwordField.getText();
+            String hashedPassword = doHashing(password);
+            user.setPassword(hashedPassword);
 
 
 
@@ -162,11 +175,31 @@ public class UserAdminPanel extends VBox {
 //
             }
 
-//    public String encryptString (String input) throws NoSuchAlgorithmException {
-//        input = passwordField.getText();
-//        MessageDigest md = MessageDigest.getInstance("MD5");
-//        byte[] messageDigest = md.digest(input.getBytes());
-//        BigInteger bigInteger = new BigInteger(1,messageDigest);
-//        return  bigInteger.toString(16);
+    public String doHashing (String input) {
+        try {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] messageDigest = md.digest(input.getBytes());
+        BigInteger bigInt = new BigInteger(1,messageDigest);
+        return bigInt.toString(16);
+        }catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+    }return "";
+    }
+//        try {
+//        MessageDigest messageDigest = java.security.MessageDigest.getInstance("MD5");
+//        messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
+//        messageDigest.digest();
+//        byte[] resultByteArray = messageDigest.digest();
+//
+//        StringBuilder stringBuilder = new StringBuilder();
+//
+//        for (byte b : resultByteArray){
+//            stringBuilder.append(String.format("%02x", b));
+//        }
+//        return stringBuilder.toString();
+//        }catch (NoSuchAlgorithmException e){
+//            e.printStackTrace();
+//        }
+//        return "";
 //    }
         }

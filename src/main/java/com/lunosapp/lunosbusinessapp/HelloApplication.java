@@ -4,8 +4,12 @@ import com.lunosapp.lunosbusinessapp.view.LoginView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
@@ -14,7 +18,7 @@ public class HelloApplication extends Application {
         LoginView loginView = new LoginView();
         Controller.instance().setStage(stage);
         Controller.instance().setLoginView(loginView);
-        Scene scene = new Scene(loginView, 600, 250);
+        Scene scene = new Scene(loginView, 750, 400);
         stage.setTitle("LUNOS poslovna aplikacija");
 
         stage.getIcons().add(new Image("logoIcon.jpg"));    //setovanje ikonice

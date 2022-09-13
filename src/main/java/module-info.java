@@ -13,6 +13,8 @@ module com.lunosapp.lunosbusinessapp {
     requires org.hibernate.commons.annotations;
     requires javax.annotation;
     requires java.base;
+    requires java.security.jgss;
+    requires java.security.sasl;
 
 //Pakete iz jave moramo otvoriti za javaFX, Hibernate etc.
     opens com.lunosapp.lunosbusinessapp to javafx.fxml, org.jetbrains.jps.builders.java.dependencyView.TypeRepr$ClassType;
@@ -20,6 +22,7 @@ module com.lunosapp.lunosbusinessapp {
     opens com.lunosapp.lunosbusinessapp.service to java.base;
     opens com.lunosapp.lunosbusinessapp.service.regionService to java.base;
     opens com.lunosapp.lunosbusinessapp.service.clientService to java.base;
+    opens com.lunosapp.lunosbusinessapp.view.adminView to java.security;
 
     //Pakete iz jave moramo otvoriti za export
     exports com.lunosapp.lunosbusinessapp.entity;

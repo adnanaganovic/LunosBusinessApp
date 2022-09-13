@@ -15,7 +15,7 @@ public class LogoutEvent implements EventHandler<ActionEvent> {
 
         LoginView loginView = new LoginView();
         Controller.instance().setLoginView(loginView);       //Ukoliko ne setujemo ovdje novi loginView, Controller (koji je singleton) će prikaziavti kešovani stari loginView
-        Scene scene = new Scene(loginView, 600, 180);
+        Scene scene = new Scene(loginView, 750, 400);
         Stage stage = new Stage();
         Controller.instance().getStage().setScene(scene);
 
